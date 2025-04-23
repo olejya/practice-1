@@ -1,0 +1,22 @@
+@startuml
+skinparam monochrome true
+
+[Teacher] as teacher
+[Telegram Bot] as bot
+[Image Processor] as processor
+[Answer Storage] as storage
+
+teacher -> bot : Uploads test photo
+bot -> processor : Sends image
+processor -> storage : Requests answer key
+storage -> processor : Returns correct answers
+processor -> bot : Sends results
+bot -> teacher : Shows grading report
+
+note right of processor
+  Processing steps:
+  1. Detect answer grid
+  2. Identify marked boxes
+  3. Compare with key
+end note
+@enduml

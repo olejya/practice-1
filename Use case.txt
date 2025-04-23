@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor Teacher as T
+rectangle "Test Check System" {
+  (Upload Answer Sheet) as UC1
+  (View Test Results) as UC2
+  (Manage Answer Keys) as UC3
+  T --> UC1
+  T --> UC2
+  T --> UC3
+  UC1 .> UC2 : <<include>>
+  UC3 .> UC2 : <<extend>>
+}
+@enduml
