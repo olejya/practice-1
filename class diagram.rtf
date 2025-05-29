@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1251\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 @startuml\
+class TelegramBot \{\
+  +start()\
+  +handleUpdates()\
+  +sendMessage()\
+  +handleCommand()\
+  +handleImage()\
+  -storage: Storage\
+\}\
+\
+class ImageHandler \{\
+  +processImage(image)\
+  -detector: CheckboxDetector\
+  -comparator: AnswerComparator\
+\}\
+\
+class CheckboxDetector \{\
+  +detectCheckboxes(image)\
+  +isChecked(checkbox)\
+  -imageProcessing()\
+\}\
+\
+class AnswerComparator \{\
+  +compareWithKey(answers)\
+  +setAnswerKey(key)\
+  -answerKey\
+\}\
+\
+class ResultsFormatter \{\
+  +formatResults(comparisonResults)\
+  -generateReport()\
+\}\
+\
+class Storage \{\
+  +saveResults()\
+  +getHistory()\
+  -simpleFileStorage()\
+\}\
+\
+class ErrorHandler \{\
+  +logError()\
+  +notifyAdmin()\
+\}\
+\
+class HelpCommand \{\
+  +showHelp()\
+  +showCommands()\
+\}\
+\
+TelegramBot --> ImageHandler\
+TelegramBot --> HelpCommand\
+TelegramBot --> ErrorHandler\
+ImageHandler --> CheckboxDetector\
+ImageHandler --> AnswerComparator\
+ImageHandler --> ResultsFormatter\
+ResultsFormatter --> Storage\
+ErrorHandler --> Storage\
+@enduml}
